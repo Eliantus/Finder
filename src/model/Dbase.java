@@ -7,7 +7,6 @@ import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
 
-import com.sun.tools.javac.Main;
 
 /**
  * @author Eliantus de MICHEL

@@ -5,9 +5,7 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
-import model.Dbase;
 
 
 /**
@@ -16,6 +14,10 @@ import model.Dbase;
  */
 public class Window extends JFrame{
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private HintField input;
 	private JLabel screen,info;
 	private JButton search,previous,next,view;

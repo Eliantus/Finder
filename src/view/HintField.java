@@ -15,7 +15,11 @@ import javax.swing.*;
  */
 public class HintField extends JTextField {
 	
-	private HintField me =this;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	private HintField me = this;
 	private int i=0;
 	
 	public HintField(String a) {

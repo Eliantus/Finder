@@ -19,6 +19,7 @@ public class Main {
 		
 		Dbase base = new Dbase("/Base.txt");
 		Controler c = new Controler(base);
+		c.getWindow().setVisible(true);
 		
 		
 

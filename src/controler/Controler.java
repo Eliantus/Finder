@@ -29,9 +29,12 @@ public class Controler implements ActionListener {
 		w.getNext().addActionListener(this);
 		w.getPrevious().addActionListener(this);
 		w.getView().addActionListener(this);
-		this.w.setVisible(true);;
+		
 	}
 	
+	public Window getWindow(){
+		return this.w;
+	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==w.getSearch()) {
@@ -180,8 +183,9 @@ public class Controler implements ActionListener {
 			this.w.getPrevious().setVisible(false);
 			this.w.getView().setVisible(false);
 			rec=-1;
-			JOptionPane j = new JOptionPane();
-			j.showMessageDialog(null, "Sorry!  We can not find this city name in our database!\nEnsure that the name is correct and written in English!", "Information",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"Sorry!  We can not find this city name in our database!\nEnsure that the name is correct and written in English!",
+					"Information", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		else {
