@@ -46,7 +46,7 @@ public class Dbase {
 				   Base.add(Temp);
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 								
