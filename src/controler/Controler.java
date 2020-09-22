@@ -16,6 +16,7 @@ public class Controler implements ActionListener {
 	private Dbase Base;
 	private int rec;
 	private double lon,lat;
+	private Map map;
 	
 	public Controler (Dbase b) {
 		w = new Window();
@@ -89,8 +90,8 @@ public class Controler implements ActionListener {
 			
 			
 			String title = "View of "+this.w.getVille()+region+this.Base.GetBase().get(tab[rec])[4]; 
-			Map m = new Map(lat,lon,title);
-			m.getFrame().setVisible(true);
+			map = new Map(lat,lon,title);
+			map.getFrame().setVisible(true);
 			
 		}
 			
