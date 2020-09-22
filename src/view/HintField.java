@@ -27,7 +27,8 @@ public class HintField extends JTextField {
 		this.setForeground(Color.gray);
 		
 		this.addFocusListener(new FocusListener() {
-		    public void focusGained(FocusEvent e) {
+		    @Override
+			public void focusGained(FocusEvent e) {
 		    	me.setForeground(Color.BLACK);
 		        if(i==0) {
 		        	me.setText("");
@@ -35,7 +36,8 @@ public class HintField extends JTextField {
 		        }
 		    }
 
-		    public void focusLost(FocusEvent e) {
+		    @Override
+			public void focusLost(FocusEvent e) {
 		       if(me.getText().length()==0) {
 		    	   me.setText(a);
 		    	   i=0;

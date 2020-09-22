@@ -1,12 +1,7 @@
-/**
- * 
- */
 package controler;
 
-import java.awt.Desktop;
-import java.awt.event.*;
-import java.net.URL;
 
+import java.awt.event.*;
 import javax.swing.*;
 import model.*;
 import view.*;
@@ -36,7 +31,10 @@ public class Controler implements ActionListener {
 		return this.w;
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e) {
+		int[] tab = this.Base.getTab();
+		
 		if(e.getSource()==w.getSearch()) {
 			String t=w.getInput().getText();
 			w.getScreen().setText("");
@@ -51,124 +49,49 @@ public class Controler implements ActionListener {
 			if(w.getVille().length()!=0 && (w.getVille().contains("a")||w.getVille().contains("e")||w.getVille().contains("i")||w.getVille().contains("o")||w.getVille().contains("u")||w.getVille().contains("y"))) {
 					this.Find();
 			}
+			else {
+				if(w.getVille().length()!=0) {
+					JOptionPane.showMessageDialog(null,
+							"Sorry! The city name is incorrect!",
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		}
 		
 		if(e.getSource()==w.getNext()) {
 			
 			if(rec<this.Base.getnb()-1) {
-				String pop,reg;
 				this.rec += 1;
-				int[] tab = this.Base.getTab();
 				this.w.getInfo().setText("  We found "+Base.getnb()+" records for this search.  (record : "+(rec+1)+"/"+this.Base.getnb()+")  ");
 				this.w.getInfo().setVisible(true);
-
-				lat= Double.valueOf(this.Base.GetBase().get(tab[rec])[2]).doubleValue();
-				lon= Double.valueOf(this.Base.GetBase().get(tab[rec])[3]).doubleValue();
-								
-				if(this.Base.GetBase().get(tab[rec])[9].equals("0")) {
-					pop="No data available";
-				}
-				else {
-					pop=this.Base.GetBase().get(tab[rec])[9];
-				}
-				
-				if(this.Base.GetBase().get(tab[rec])[7].equals("0")) {
-					reg="No data available";
-				}
-				else {
-					reg=this.Base.GetBase().get(tab[rec])[7];
-				}
-				
-				w.getScreen().setText("<html><table style=\\\"color: #02385E;\\\">"
-						+ "<tr>"
-						+ "<td><b>City</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[0]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Latitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[2]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Longitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[3]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Population</b></td>"+"<td>:</td>"+"<td>"+pop+" <i><b>(en 2019)</b></i></td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Region</b></td>"+"<td>:</td>"+"<td>"+reg+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[4]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country ISO3</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[6]+"</td>"
-						+ "</tr>"
-						+ "</table></html>");
-			
+				Result();
 			}
 			
 		}
 		
 		if(e.getSource()==w.getPrevious()) {
 			if(rec>0) {
-				String pop,reg;
 				this.rec -= 1;
-				int[] tab = this.Base.getTab();
 				this.w.getInfo().setText("  We found "+Base.getnb()+" records for this search.  (record : "+(rec+1)+"/"+this.Base.getnb()+")  ");
 				this.w.getInfo().setVisible(true);
-				
-
-				lat= Double.valueOf(this.Base.GetBase().get(tab[rec])[2]).doubleValue();
-				lon= Double.valueOf(this.Base.GetBase().get(tab[rec])[3]).doubleValue();
-				
-				
-				if(this.Base.GetBase().get(tab[rec])[9].equals("0")) {
-					pop="No data available";
-				}
-				else {
-					pop=this.Base.GetBase().get(tab[rec])[9];
-				}
-				
-				if(this.Base.GetBase().get(tab[rec])[7].equals("0")) {
-					reg="No data available";
-				}
-				else {
-					reg=this.Base.GetBase().get(tab[rec])[7];
-				}
-				
-				w.getScreen().setText("<html><table style=\\\"color: #02385E;\\\">"
-						+ "<tr>"
-						+ "<td><b>City</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[0]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Latitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[2]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Longitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[3]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Population</b></td>"+"<td>:</td>"+"<td>"+pop+" <i><b>(en 2019)</b></i></td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Region</b></td>"+"<td>:</td>"+"<td>"+reg+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[4]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country ISO3</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[6]+"</td>"
-						+ "</tr>"
-						+ "</table></html>");
-			
+				Result();
 			}
 			
 		}
 		
 		if(e.getSource()==w.getView()) {
 			
-			String lien ="https://www.google.com/maps/search/"+lat+","+lon; 
-			try {
-				
-			    Desktop.getDesktop().browse(new URL(lien).toURI());
-			} catch (Exception a) {}
+			String region=new String();
+			if(this.Base.GetBase().get(tab[rec])[7].equals("0"))
+				region=", ";
+			else 
+				region=", "+this.Base.GetBase().get(tab[rec])[7]+", ";
+			
+			
+			String title = "View of "+this.w.getVille()+region+this.Base.GetBase().get(tab[rec])[4]; 
+			Map m = new Map(lat,lon,title);
+			m.getFrame().setVisible(true);
+			
 		}
 			
 				
@@ -190,108 +113,75 @@ public class Controler implements ActionListener {
 		
 		else {
 			
-			String pop,reg;
-			rec = this.Base.getTab()[0];
+			rec =  0;			
+			
 			w.getView().setVisible(true);
 			
 			if(this.Base.getnb()==1) {
+				
 				this.w.getInfo().setText("  We found 1 record for this search.  ");
 				this.w.getInfo().setVisible(true);
-				lat= Double.valueOf(this.Base.GetBase().get(rec)[2]).doubleValue();
-				lon= Double.valueOf(this.Base.GetBase().get(rec)[3]).doubleValue();
 				this.w.getNext().setVisible(false);
 				this.w.getPrevious().setVisible(false);
-				
-				if(this.Base.GetBase().get(rec)[9].equals("0")) {
-					pop="No data available";
-				}
-				else {
-					pop=this.Base.GetBase().get(rec)[9];
-				}
-				
-				if(this.Base.GetBase().get(rec)[7].equals("0")) {
-					reg="No data available";
-				}
-				else {
-					reg=this.Base.GetBase().get(rec)[7];
-				}
-				
-				w.getScreen().setText("<html><table style=\\\"color: #02385E;\\\">"
-						+ "<tr>"
-						+ "<td><b>City</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(rec)[0]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Latitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(rec)[2]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Longitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(rec)[3]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Population</b></td>"+"<td>:</td>"+"<td>"+pop+" <i><b>(en 2019)</b></i></td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Region</b></td>"+"<td>:</td>"+"<td>"+reg+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(rec)[4]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country ISO3</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(rec)[6]+"</td>"
-						+ "</tr>"
-						+ "</table></html>");
+				Result();			
 			
 			}
 			
 			if(this.Base.getnb()>1) {
-				this.rec = 0;
-				int[] tab = this.Base.getTab();
+				
 				this.w.getInfo().setText("  We found "+Base.getnb()+" records for this search.  (record : "+(rec+1)+"/"+this.Base.getnb()+")  ");
 				this.w.getInfo().setVisible(true);
 				this.w.getNext().setVisible(true);
 				this.w.getPrevious().setVisible(true);
-				
-				lat= Double.valueOf(this.Base.GetBase().get(tab[rec])[2]).doubleValue();
-				lon= Double.valueOf(this.Base.GetBase().get(tab[rec])[3]).doubleValue();
-				
-				if(this.Base.GetBase().get(tab[rec])[9].equals("0")) {
-					pop="No data available";
-				}
-				else {
-					pop=this.Base.GetBase().get(tab[rec])[9];
-				}
-				
-				if(this.Base.GetBase().get(tab[rec])[7].equals("0")) {
-					reg="No data available";
-				}
-				else {
-					reg=this.Base.GetBase().get(tab[rec])[7];
-				}
-				
-				w.getScreen().setText("<html><table style=\\\"color: #02385E;\\\">"
-						+ "<tr>"
-						+ "<td><b>City</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[0]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Latitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[2]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Longitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[3]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Population</b></td>"+"<td>:</td>"+"<td>"+pop+" <i><b>(en 2019)</b></i></td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Region</b></td>"+"<td>:</td>"+"<td>"+reg+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[4]+"</td>"
-						+ "</tr>"
-						+ "<tr>"
-						+ "<td><b>Country ISO3</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[6]+"</td>"
-						+ "</tr>"
-						+ "</table></html>");
-			
+				Result();
 			}
 		}
+	}
+	
+	public void Result() {
+		String pop,reg;
+		int[] tab = this.Base.getTab();
+				
+		lat= Double.valueOf(this.Base.GetBase().get(tab[rec])[2]).doubleValue();
+		lon= Double.valueOf(this.Base.GetBase().get(tab[rec])[3]).doubleValue();
+		
+		if(this.Base.GetBase().get(tab[rec])[9].equals("0")) {
+			pop="No data available";
+		}
+		else {
+			pop=this.Base.GetBase().get(tab[rec])[9];
+		}
+		
+		if(this.Base.GetBase().get(tab[rec])[7].equals("0")) {
+			reg="No data available";
+		}
+		else {
+			reg=this.Base.GetBase().get(tab[rec])[7];
+		}
+		
+		w.getScreen().setText("<html><table style=\\\"color: #02385E;\\\">"
+				+ "<tr>"
+				+ "<td><b>City</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[0]+"</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Latitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[2]+"</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Longitude</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[3]+"</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Population</b></td>"+"<td>:</td>"+"<td>"+pop+" <i><b>(en 2019)</b></i></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Region</b></td>"+"<td>:</td>"+"<td>"+reg+"</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Country</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[4]+"</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td><b>Country ISO3</b></td>"+"<td>:</td>"+"<td>"+this.Base.GetBase().get(tab[rec])[6]+"</td>"
+				+ "</tr>"
+				+ "</table></html>");
+		
 	}
 }

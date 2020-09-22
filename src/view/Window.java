@@ -87,14 +87,13 @@ public class Window extends JFrame{
 		this.add(previous,BorderLayout.WEST);
 		
 		//Custom Frame
-		this.setPreferredSize(new Dimension(700,390));
+		this.setMinimumSize(new Dimension(700,390));
 		this.pack();
 		screen.requestFocusInWindow();;
 		this.setTitle("Quick City Finder English version");
 		ImageIcon img = new ImageIcon(Main.class.getResource("/logo.png"));
 		this.setIconImage(img.getImage());
 		this.setLocationRelativeTo(null);
-		this.setResizable(false);
 		this.getRootPane().setDefaultButton(search);
 		
 	}
