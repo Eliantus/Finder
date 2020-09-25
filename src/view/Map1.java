@@ -58,9 +58,5 @@ public class Map1 {
 	public String getcity() {
 		return city;
 	}
-	
-	public void setcity(String a) {
-		city=a;
-	}
 
 }
