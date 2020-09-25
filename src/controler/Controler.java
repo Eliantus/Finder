@@ -17,6 +17,7 @@ public class Controler implements ActionListener {
 	private int rec;
 	private double lon,lat;
 	private Map map;
+	private Map1 map1;
 	
 	public Controler (Dbase b) {
 		w = new Window();
@@ -107,9 +108,13 @@ public class Controler implements ActionListener {
 			this.w.getPrevious().setVisible(false);
 			this.w.getView().setVisible(false);
 			rec=-1;
-			JOptionPane.showMessageDialog(null,
-					"Sorry!  We can not find this city name in our database!\nEnsure that the name is correct and written in English!",
-					"Information", JOptionPane.INFORMATION_MESSAGE);
+			int reponse = JOptionPane.showInternalConfirmDialog(null,"Sorry. We could not find a city name \""+w.getVille()+"\" in our database.\n"
+			+"Would you like to search this city name online ?",w.getVille()+" not found",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			if(reponse==0) {
+				map1 = new Map1(w.getVille());
+				map1.getFrame().setVisible(true);
+			}
+				
 		}
 		
 		else {
